@@ -1,85 +1,74 @@
-# Universidad ORT Uruguay Facultad de Ingeniería
+# Repositorio del Obligatorio-Documentacion
+Este repositorio contiene el código y la documentación del Obligatorio.
 
-> [!IMPORTANT]
-> Ir agregando información
+## Estructura del Repositorio
+El repositorio sigue un flujo de trabajo trunk based, donde la rama main es estable y contiene los archivos y documentos que se entregarán a la facultad una vez finalizado el proyecto.
 
-## Flujo de Trabajo
-Para gestionar el versionado del trabajo, hemos implementado dos flujos de trabajo distintos, adaptados a las necesidades de cada etapa del proyecto: Gitflow para el desarrollo y Trunk-Based para las prácticas de DevOps.
+- Rama estable
 
-### - Gitflow para Desarrollo
-Se han creado dos repositorios, uno para el Backend y otro para el Frontend, con el objetivo de facilitar la gestión del versionado. Ambos repositorios siguen la estructura de Gitflow, como se muestra en el siguiente diagrama:
+**main** : Esta rama contiene la versión estable del proyecto. Todos los cambios y adiciones deben integrarse en esta rama antes de la entrega final.
 
-![Diagrama de GitFlow para Desarrollo](./Imagenes/GitFlow-Desarrollo.png)
+- Ramas auxiliares 
 
-#### Ramas Principales (ramas estables)
-- **Main**: Contiene el código de producción.
-- **Release**: Contiene el código preparado para pasar a producción.
-- **Test**: Contiene el código para pruebas integrales antes de ser liberado.
-- **Develop**: Contiene el código para la próxima versión que está en desarrollo.
+**feature/##** : Para agregar nuevos archivos, documentos o realizar cambios significativos, crea una rama feature descriptiva a partir de main. Una vez completado el trabajo en la rama feature, se fusionará de vuelta a main. Ejemplo de rama: "feature/documentacion-readme"
 
-#### Ramas de Soporte (ramas auxiliares)
-- **HotFix**: Ramas para corregir errores críticos en producción.
-- **ReleaseFix**: Ramas para corregir errores en las versiones preparadas en la rama Release.
-- **BugFix**: Ramas para corregir errores encontrados durante la relaización de pruebas.
-- **Feature**: Ramas para desarrollar nuevas características.
+## Cómo Contribuir
+Para contribuir al proyecto, seguir estos pasos:
 
-### - Trunk-Based para DevOps
-Para la parte de DevOps, se ha creado un repositorio que utiliza el flujo de trabajo Trunk-Based. Este enfoque permite una gestión sencilla y eficiente del código, facilitando la integración constante de los cambios. A continuación, se presenta un diagrama que ilustra esta estructura:
+1. **Clonar el repositorio:**
 
-> [!CAUTION]
-> Agregar Imagen
+```
+git clone https://github.com/ORTDevOps-G12/Obligatorio-Documentacion.git
+cd nombre-del-repositorio
+```
 
-#### Ramas Principales
-- **main**: Rama que contiene la ultima version ..
+2. **Crea una rama feature:**
 
-## Herramientas elegidas
-- Planificación: Azure Boards
-- Code: GitHub
-- Build:
-    - GitHub actions
-    - Apache Maven
-    - Gradle
-    -Docker
+Antes de comenzar a trabajar en un cambio, crear una nueva rama feature basada en main:
 
-- Test: (Pendiente definir, segun las pruebas extras a realizar)
-    - Selenium
-    - JUnit 
-    - Postman
-    - TestNG
-    - SonarQube
-    - SonarCloud
-    - Blackduck
-    - Fortify
-    - Cypress
-    - Mocha
-    - Chai
+```
+git checkout main
+git pull origin main
+git checkout -b nombre-de-la-feature
+```
+Asegurarse de nombrar la rama feature de manera descriptiva, por ejemplo, feature/actualizar-documentacion.
 
-CI/CD:
-- GitHub actions
+3. **Realizar los cambios:**
 
-- Deploy (Pendiente definir)
-    - Kubernetes
-    - Docker
-    - Ansible
-    - Terraform
-    - AWS CodeDeploy
-    - OpenShift
-    - Rancher
-    - Nomad
-    - Chef
-    - Puppet
+Hacer los cambios necesarios en la rama feature. Añadir nuevos archivos, documentos, o realizar modificaciones según sea necesario.
 
+4. **Hacer commit de los cambios:**
 
-Cloud
-•	AWS (Amazon Web Services)
-•	Azure
-•	Google Cloud Platform (GCP)
-•	DigitalOcean
-•	IBM Cloud
-•	Oracle Cloud
-•	Alibaba Cloud
+Una vez completados los cambios, hacer commit de ellos:
 
+```
+git add .
+git commit -m "Breve descripción de los cambios realizados"
+```
 
+5. **Sincronizar con main y hacer merge:**
 
+Antes de fusionar los cambios con main, asegurarse de estar actualizado y de que los cambios no causen conflictos:
 
+```
+git checkout main
+git pull origin main
+git merge --no-ff nombre-de-la-feature
+```
 
+6. **Elimina la rama feature (opcional):**
+
+Si ya no se necesita la rama feature después de haberla fusionado, se puede eliminar del repositorio local y remoto:
+
+```
+git branch -d nombre-de-la-feature
+git push origin --delete nombre-de-la-feature
+```
+
+7. **Envíar los cambios:**
+
+Finalmente, envíar los cambios al repositorio remoto:
+
+```
+git push origin main
+```
