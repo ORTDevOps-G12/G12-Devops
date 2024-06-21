@@ -32,5 +32,54 @@ Para la parte de DevOps, se ha creado un repositorio que utiliza el flujo de tra
 #### Ramas Principales
 - **main**: Rama que contiene la ultima version ..
 
+## Herramientas elegidas
+- Planificación: Azure Boards
+- Code: GitHub
+- Build:
+    - GitHub actions
+    - Apache Maven
+    - Gradle
+    -Docker
+
+- Test: (Pendiente definir, segun las pruebas extras a realizar)
+    - Selenium
+    - JUnit 
+    - Postman
+    - TestNG
+    - SonarQube
+    - SonarCloud
+    - Blackduck
+    - Fortify
+    - Cypress
+    - Mocha
+    - Chai
+
+CI/CD:
+- GitHub actions
+
+- Deploy (Pendiente definir)
+    - Kubernetes
+    - Docker
+    - Ansible
+    - Terraform
+    - AWS CodeDeploy
+    - OpenShift
+    - Rancher
+    - Nomad
+    - Chef
+    - Puppet
+
+
+Cloud
+•	AWS (Amazon Web Services)
+•	Azure
+•	Google Cloud Platform (GCP)
+•	DigitalOcean
+•	IBM Cloud
+•	Oracle Cloud
+•	Alibaba Cloud
+
+
+
 
 
