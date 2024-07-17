@@ -107,13 +107,13 @@ Toda la infraestructura será desplegada como código (IaC) utilizando Terraform
 Los resultados detallados de SonarCloud se pueden visualizar en las siguientes capturas de pantalla:
 
 - *Reporte de SonarCloud - Products*
-![Reporte de SonarCloud - Products](./Imagenes/BE-ProductsService)
+![Reporte de SonarCloud - Products](./Imagenes/BE-ProductsService.png)
 
 - *Reporte de SonarCloud - Payments*
-![Reporte de SonarCloud - Payments](./Imagenes/BE-PaymentsService)
+![Reporte de SonarCloud - Payments](./Imagenes/BE-PaymentsService.png)
 
 - *Reporte de SonarCloud - Shipping*
-![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService)
+![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService.png)
 
 - *Reporte de SonarCloud - Fronted*
 ![Reporte de SonarCloud - Frontend](./Imagenes/FE-ReactApp.png)
