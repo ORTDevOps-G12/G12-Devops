@@ -51,9 +51,11 @@ resource "aws_lb" "app" {
 resource "aws_lb_target_group" "app" {
   name        = "${terraform.workspace}-tg-${var.project_name}"
   port        = 8080
-  protocol    = "HTTP"
+  protocol    = "TCP"
   vpc_id      = module.vpc.vpc_id
   target_type = "ip"
+ 
+  connection_termination = true
 }
 
 resource "aws_lb_listener" "app" {
@@ -69,7 +71,7 @@ resource "aws_lb_listener" "app" {
 
 # Cluster ECS
 resource "aws_ecs_cluster" "main" {
-  name = var.cluster_name
+  name = "${terraform.workspace}-${var.project_name}-cluster"
 }
 
 #cloudWatch
@@ -80,13 +82,13 @@ resource "aws_cloudwatch_log_group" "ecs_log_group" {
 
 # Task Definition
 resource "aws_ecs_task_definition" "products-task" {
-  family                = "${terraform.workspace}-${var.products-service-backend-name}-task"
+  family                = "${terraform.workspace}-${var.project_name}-products-task"
   network_mode          = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                   = "512"
   memory                = "1024"
   container_definitions = jsonencode([{
-    name      = "cont-${var.products-service-backend-name}"
+    name      = "${terraform.workspace}-${var.project_name}-products-container"
     image     = var.products-service-docker-image
     cpu       = 512
     memory    = 1024
@@ -111,13 +113,13 @@ resource "aws_ecs_task_definition" "products-task" {
 
 # Task Definition
 resource "aws_ecs_task_definition" "payments-task" {
-  family                = "${terraform.workspace}-${var.payments-service-backend-name}-task"
+  family                = "${terraform.workspace}-${var.project_name}-payments-task"
   network_mode          = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                   = "512"
   memory                = "1024"
   container_definitions = jsonencode([{
-    name      = "cont-${var.payments-service-backend-name}"
+    name      = "${terraform.workspace}-${var.project_name}-payments-container"
     image     = var.payments-service-docker-image
     cpu       = 512
     memory    = 1024
@@ -142,13 +144,13 @@ resource "aws_ecs_task_definition" "payments-task" {
 
 # Task Definition
 resource "aws_ecs_task_definition" "shipping-task" {
-  family                = "${terraform.workspace}-${var.shipping-service-backend-name}-task"
+  family                = "${terraform.workspace}-${var.project_name}-shipping-task"
   network_mode          = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                   = "512"
   memory                = "1024"
   container_definitions = jsonencode([{
-    name      = "cont-${var.shipping-service-backend-name}"
+    name      = "${terraform.workspace}-${var.project_name}-shipping-container"
     image     = var.shipping-service-docker-image
     cpu       = 512
     memory    = 1024
@@ -172,13 +174,13 @@ resource "aws_ecs_task_definition" "shipping-task" {
 }
 
 resource "aws_ecs_task_definition" "orders-task" {
-  family                   = "${terraform.workspace}-${var.orders-service-backend-name}-task"
+  family                   = "${terraform.workspace}-${var.project_name}-orders-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "512"
   memory                   = "1024"
   container_definitions    = jsonencode([{
-    name  = "cont-${var.orders-service-backend-name}"
+    name  = "${terraform.workspace}-${var.project_name}-orders-container"
     image = var.orders-service-docker-image
     cpu       = 512
     memory    = 1024
@@ -219,7 +221,7 @@ resource "aws_ecs_task_definition" "orders-task" {
 
 # ECS Service
 resource "aws_ecs_service" "products-service" {
-  name            = "${terraform.workspace}-${var.products-service-backend-name}-service"
+  name            = "${terraform.workspace}-${var.project_name}-products-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.products-task.arn
   desired_count   = 1
@@ -231,14 +233,14 @@ resource "aws_ecs_service" "products-service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "cont-${var.products-service-backend-name}"
+    container_name   = "${terraform.workspace}-${var.project_name}-products-container"
     container_port   = 8080
   }
   depends_on = [aws_lb_listener.app]
 }
 
 resource "aws_ecs_service" "payments-service" {
-  name            = "${terraform.workspace}-${var.payments-service-backend-name}-service"
+  name            ="${terraform.workspace}-${var.project_name}-payments-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.payments-task.arn 
   desired_count   = 1
@@ -250,14 +252,14 @@ resource "aws_ecs_service" "payments-service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "cont-${var.payments-service-backend-name}"
+    container_name   = "${terraform.workspace}-${var.project_name}-payments-container"
     container_port   = 8080
   }
   depends_on = [aws_lb_listener.app]
 }
 
 resource "aws_ecs_service" "shipping-service" {
-  name            = "${terraform.workspace}-${var.shipping-service-backend-name}-service"
+  name            = "${terraform.workspace}-${var.project_name}-shipping-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.shipping-task.arn
   desired_count   = 1
@@ -269,14 +271,14 @@ resource "aws_ecs_service" "shipping-service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "cont-${var.shipping-service-backend-name}"
+    container_name   = "${terraform.workspace}-${var.project_name}-shipping-container"
     container_port   = 8080
   }
   depends_on = [aws_lb_listener.app]
 }
 
 resource "aws_ecs_service" "orders-service" {
-  name            = "${terraform.workspace}-${var.orders-service-backend-name}-service"
+  name            = "${terraform.workspace}-${var.project_name}-orders-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.orders-task.arn
   desired_count   = 1
@@ -288,16 +290,44 @@ resource "aws_ecs_service" "orders-service" {
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
-    container_name   = "cont-${var.orders-service-backend-name}"
+    container_name   = "${terraform.workspace}-${var.project_name}-orders-container"
     container_port   = 8080
   }
  depends_on = [aws_lb_listener.app]
 }
 
-module "backup" {
+module "backup-products" {
   source = "./modules/bkp"
-  cluster_name = var.cluster_name
+  object_name = "products"
+  cluster_name = "Backup-cluster-${var.project_name}"
   labrole_arn = var.labrole_arn
-  products-service-docker-image = var.products-service-docker-image
+  docker-image = var.products-service-docker-image
   subnets = module.vpc.public_subnets
 }
+
+# module "backup-payments" {
+#   source = "./modules/bkp"
+#   object_name = "payments"
+#   cluster_name = "Backup-cluster-${var.project_name}"
+#   labrole_arn = var.labrole_arn
+#   docker-image = var.payments-service-docker-image
+#   subnets = module.vpc.public_subnets
+# }
+
+# module "backup-shipping" {
+#   source = "./modules/bkp"
+#   object_name = "shipping"
+#   cluster_name = "Backup-cluster-${var.project_name}"
+#   labrole_arn = var.labrole_arn
+#   docker-image = var.shipping-service-docker-image
+#   subnets = module.vpc.public_subnets
+# }
+
+# module "backup-orders" {
+#   source = "./modules/bkp"
+#   object_name = "orders"
+#   cluster_name = "Backup-cluster-${var.project_name}"
+#   labrole_arn = var.labrole_arn
+#   docker-image = var.orders-service-docker-image
+#   subnets = module.vpc.public_subnets
+# }

@@ -8,8 +8,7 @@ resource "aws_ecs_task_definition" "backup_task" {
   container_definitions = jsonencode([
     {
       name      = "backup-container"
-      image     = var.products-service-docker-image
-      essential = true
+      image     = var.docker-image
       environment = [
         {
           name  = "CLUSTER"
@@ -17,7 +16,7 @@ resource "aws_ecs_task_definition" "backup_task" {
         },
          {
           name  = "TASK_DEFINITION"
-          value = "backup-task"
+          value = "backup-task-${var.object_name}"
         },
          {
           name  = "SUBNET_ID"

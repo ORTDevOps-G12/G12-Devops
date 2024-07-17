@@ -1,11 +1,11 @@
 resource "aws_s3_bucket" "fe-bucket-tf"{
-    bucket = var.bucket_name
+    bucket = "${terraform.workspace}-${var.project_name}-frontend-catalog"
 
     force_destroy = true
 
     tags = {
-        Name        = var.bucket_name
-        Environment = var.environment
+        Name        = "${terraform.workspace}-${var.project_name}-frontend-catalog"
+        Environment = "${terraform.workspace}"
     }
 }
 
@@ -59,7 +59,7 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
     ]
   })
 
-  depends_on = [ aws_s3_bucket_public_access_block.example ]
+  depends_on = [ aws_s3_bucket_acl.example ]
 }
 
 module "template_files" {
@@ -73,6 +73,10 @@ resource "aws_s3_bucket_website_configuration" "frontend_bucket_website_configur
   index_document {
     suffix = "index.html"
   }
+
+  depends_on = [
+    aws_s3_bucket_policy.frontend_bucket_policy
+  ]
 }
 
 resource "aws_s3_bucket_object" "bucket_web_files" {
@@ -86,4 +90,8 @@ resource "aws_s3_bucket_object" "bucket_web_files" {
   content = each.value.content
 
   etag = each.value.digests.md5
+
+   depends_on = [
+    aws_s3_bucket_website_configuration.frontend_bucket_website_configuration
+  ]
 }

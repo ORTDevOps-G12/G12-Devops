@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "backup_schedule" {
   name                = "daily_ecs_backup"
   description         = "Triggers the ECS backup Lambda function daily"
-  schedule_expression = "rate(5 minutes)"
+  schedule_expression = "rate(1 day)"
 }
 
 resource "aws_cloudwatch_event_target" "backup_target" {
