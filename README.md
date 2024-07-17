@@ -115,7 +115,7 @@ Los resultados detallados de SonarCloud se pueden visualizar en las siguientes c
 - *Reporte de SonarCloud - Shipping*
 ![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService.png)
 
-- *Reporte de SonarCloud - Fronted*
+- *Reporte de SonarCloud - Frontend*
 ![Reporte de SonarCloud - Frontend](./Imagenes/FE-ReactApp.png)
 
 **Reporte de Pruebas Funcionales:**
