@@ -1,6 +1,0 @@
-vpc_name = "vpcdev"
-security_group_name = "sgdev"
-environment_name = "dev"
-load_balancer_name = "lbdev"
-target_group_name = "tgdev"
-cluster_name = "clusterdev"
