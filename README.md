@@ -100,32 +100,23 @@ Toda la infraestructura será desplegada como código (IaC) utilizando Terraform
 
 **Reporte de SonarCloud:**
 
-- Microservicio "Products": No pasó,
-- Microservicio "Payments": [Pasó o no pasó, como?]
-- Microservicio "Shipping": [Pasó o no pasó, como?]
-
 Los resultados detallados de SonarCloud se pueden visualizar en las siguientes capturas de pantalla:
 
 - *Reporte de SonarCloud - Products*
-![Reporte de SonarCloud - Products](./Imagenes/BE-ProductsService)
+![Reporte de SonarCloud - Products](./Imagenes/BE-ProductsService.png)
 
 - *Reporte de SonarCloud - Payments*
-![Reporte de SonarCloud - Payments](./Imagenes/BE-PaymentsService)
+![Reporte de SonarCloud - Payments](./Imagenes/BE-PaymentsService.png)
 
 - *Reporte de SonarCloud - Shipping*
-![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService)
+![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService.png)
 
-- *Reporte de SonarCloud - Fronted*
+- *Reporte de SonarCloud - Frontend*
 ![Reporte de SonarCloud - Frontend](./Imagenes/FE-ReactApp.png)
 
 **Reporte de Pruebas Funcionales:**
 
-- Microservicio Orders: [Pasó o no pasó, como?]
-- Microservicio Payments: [Pasó o no pasó, como?]
-- Microservicio Shipping: [Pasó o no pasó, como?]
-
 Los resultados detallados de las pruebas funcionales se pueden visualizar en los siguientes enlaces (o capturas?):
-
 
 - *Reporte de Pruebas Funcionales (Sobre las aplicaciones de Backend)*
 
