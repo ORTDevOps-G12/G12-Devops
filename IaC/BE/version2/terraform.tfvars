@@ -1,0 +1,17 @@
+aws_region     = "us-east-1"
+project_name = "ortg12"
+cluster_name = "ortg12"
+products-service-backend-name = "products"
+products-service-docker-image = "nconan/products-service-example:dev1"
+payments-service-backend-name = "payments"
+payments-service-docker-image = "nconan/paments-service-example:dev1"
+shipping-service-backend-name = "shipping"
+shipping-service-docker-image = "nconan/shipping-service-example:dev1"
+orders-service-backend-name = "orders"
+orders-service-docker-image = "nconan/orders-service-example:dev1"
+labrole_arn = "arn:aws:iam::576955172276:role/LabRole"
+s3-backup-bucket = "bkp-bucket-g12"
+#CREDENCIALES HABRIA QUE MANEJARLAS SON SSM
+docker_username = "nconan"
+docker_password = "BvarArtigas@2260"
+

@@ -1,0 +1,6 @@
+vpc_name = "vpc_dev"
+security_group_name = "sg_dev"
+environment_name = "dev"
+load_balancer_name = "lb_dev"
+target_group_name = "tg_dev"
+cluster_name = "cluster_dev"
