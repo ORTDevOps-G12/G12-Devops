@@ -1,0 +1,7 @@
+aws_region = "us-east-1"
+project_name = "ortg12"
+products-service-docker-image = "nconan/products-service-example:dev1"
+payments-service-docker-image = "nconan/payments-service-example:dev1"
+shipping-service-docker-image = "nconan/shipping-service-example:dev1"
+orders-service-docker-image = "nconan/orders-service-example:dev1"
+labrole_arn = "arn:aws:iam::576955172276:role/LabRole"
