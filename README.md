@@ -80,7 +80,7 @@ Toda la infraestructura será desplegada como código (IaC) utilizando Terraform
 
 #### Implementación de CI/CD
 
-[insertar imagen de pipeline]
+![Diagrama de Pipeline CICD](./Imagenes/PipelineGithubActions.png)
 
 ##### Pipeline de CI (Integración Continua):
 
@@ -100,15 +100,23 @@ Toda la infraestructura será desplegada como código (IaC) utilizando Terraform
 
 **Reporte de SonarCloud:**
 
-- Microservicio "Products": [Pasó o no pasó, como?]
+- Microservicio "Products": No pasó,
 - Microservicio "Payments": [Pasó o no pasó, como?]
 - Microservicio "Shipping": [Pasó o no pasó, como?]
 
-Los resultados detallados de SonarCloud se pueden visualizar en los siguientes enlaces (o capturas?):
+Los resultados detallados de SonarCloud se pueden visualizar en las siguientes capturas de pantalla:
 
-- *Reporte de SonarCloud - Products (link o captura)*
-- *Reporte de SonarCloud - Payments (link o captura)*
-- *Reporte de SonarCloud - Shipping (link o captura)*
+- *Reporte de SonarCloud - Products*
+![Reporte de SonarCloud - Products](./Imagenes/BE-ProductsService)
+
+- *Reporte de SonarCloud - Payments*
+![Reporte de SonarCloud - Payments](./Imagenes/BE-PaymentsService)
+
+- *Reporte de SonarCloud - Shipping*
+![Reporte de SonarCloud - Shipping](./Imagenes/BE-ShippingService)
+
+- *Reporte de SonarCloud - Fronted*
+![Reporte de SonarCloud - Frontend](./Imagenes/FE-ReactApp.png)
 
 **Reporte de Pruebas Funcionales:**
 
@@ -118,21 +126,34 @@ Los resultados detallados de SonarCloud se pueden visualizar en los siguientes e
 
 Los resultados detallados de las pruebas funcionales se pueden visualizar en los siguientes enlaces (o capturas?):
 
-- *Reporte de Pruebas - Products (link o captura)*
-- *Reporte de Pruebas - Payments (link o captura)*
-- *Reporte de Pruebas - Shipping (link o captura)*
-- *Reporte de Pruebas - Orders (link o captura)*
+
+- *Reporte de Pruebas Funcionales (Sobre las aplicaciones de Backend)*
+
+![Reporte de Pruebas Funcionales parte1](./Imagenes/PostmanCollectionAnalyzeP1.png)
+![Reporte de Pruebas Funcionales parte2](./Imagenes/PostmanCollectionAnalyzeP2.png)
 
 #### Gestión del Proyecto y Limitaciones
 Para la gestión del proyecto se utilizó un tablero Kanban en Azure Devops, donde se detallaron todas las tareas y se realizó el seguimiento del progreso.
 
-> [!IMPORTANT]
-> Pendiente mencionar:
-> - Manejo github
-> - CF no disponible ?
-> - SonarCloud de orders
-> - Modularizacion en terraform
+- Limitaciones 
 
+    - Manejo feature/branch 
+
+Aunque GitHub fue uno de los temas tratados y trabajados en clase, el equipo no estaba familiarizado con esta herramienta. Esto complicó un poco el uso de la estrategia feature/branch durante el proyecto. A medida que avanzamos, nuestra experiencia creció, pero no fue suficiente para lograr un funcionamiento fluido en el tiempo disponible para la ejecución del proyecto.
+
+    - CloudFront no disponible para cuentas AWS Academy
+
+Al inicio del proyecto, se optó por utilizar CloudFront como servicio serverless. Sin embargo, durante la implementación, se nos informó que este servicio ya no estaba habilitado para cuentas académicas de AWS. Esto obligó a dedicar tiempo adicional en fases avanzadas del proyecto para investigar y adoptar otros servicios serverless.
+
+    - SonarCloud Orders
+
+No se pudo realizar el análisis de código estático para el microservicio "Orders" debido a un error generado durante la implementación de SonarCloud en ese repositorio. Aunque consultamos en una de las tutorías, no logramos una solución. Dado que en el resto de los repositorios la implementación de SonarCloud fue exitosa, descartamos que se tratara de un error de configuración, ya que se siguió el mismo procedimiento para todos. Por lo tanto, decidimos no ejecutar el análisis para este microservicio en particular. A continuación se deja captura del error obtenido:
+
+![Diagrama de Pipeline CICD](./Imagenes/ErrorEnOrdersService-Sonar.png)
+
+    - Modularización Terraform
+
+Reconocemos que la modularización en Terraform es una buena práctica. Sin embargo, priorizamos la funcionalidad de las configuraciones de Terraform y no tuvimos tiempo suficiente para modularizar y optimizar nuestra infraestructura como código (IaC). Continuaremos trabajando para lograr esta mejora en el futuro.
 
 #### Documentación
 Toda la documentación del proyecto se realizó en Markdown y se encuentra alojada en los repositorios correspondientes en GitHub. Esta incluye diagramas, descripciones de la infraestructura, archivos de configuración y capturas varias.
